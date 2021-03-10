@@ -1,6 +1,5 @@
+import { EventEmitter, Input, Output } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
-import { SharedService } from '../shared.service';
 
 @Component({
   selector: 'app-first',
@@ -8,15 +7,14 @@ import { SharedService } from '../shared.service';
   styleUrls: ['./first.component.css'],
 })
 export class FirstComponent implements OnInit {
-  name$ = new Subject<string>();
-  name: string;
-  constructor(private service: SharedService) {}
+  @Input() name: string;
+  @Output() save = new EventEmitter();
 
-  ngOnInit(): void {
-    this.name$ = this.service.name;
-  }
+  constructor() {}
 
-  save() {
-    this.service.save(this.name);
+  ngOnInit(): void {}
+
+  clickSave(name) {
+    this.save.emit(name);
   }
 }

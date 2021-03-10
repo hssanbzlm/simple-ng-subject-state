@@ -5,10 +5,5 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class SharedService {
-  name = new Subject<string>();
   constructor() {}
-
-  save(value) {
-    this.name.next(value);
-  }
 }
